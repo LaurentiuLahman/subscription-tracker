@@ -47,7 +47,7 @@ function App() {
 
   const fetchSubs = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/subscriptions');
+      const res = await axios.get('https://subscription-api-qv60.onrender.com/api/subscriptions');
       setSubscriptions(res.data);
     } catch (err) {
       toast.error("Nu am putut încărca abonamentele.");
@@ -73,13 +73,13 @@ function App() {
 
     try {
       if (editingId) {
-        const res = await axios.put(`http://localhost:5000/api/subscriptions/${editingId}`, form);
+        const res = await axios.put(`https://subscription-api-qv60.onrender.com/api/subscriptions/${editingId}`, form);
         
         setSubscriptions(subscriptions.map(sub => sub._id === editingId ? res.data : sub));
         toast.success("Abonament actualizat!");
         setEditingId(null); 
       } else {
-        const res = await axios.post('http://localhost:5000/api/subscriptions', form);
+        const res = await axios.post('https://subscription-api-qv60.onrender.com/api/subscriptions', form);
         setSubscriptions([...subscriptions, res.data]);
         toast.success("Abonament adăugat!");
       }
@@ -115,7 +115,7 @@ function App() {
   const handleDelete = async (id) => {
     if (!window.confirm("Sigur ștergi?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/subscriptions/${id}`);
+      await axios.delete(`https://subscription-api-qv60.onrender.com/api/subscriptions/${id}`);
       setSubscriptions(subscriptions.filter(sub => sub._id !== id));
       toast.success("Șters!", { icon: '🗑️' });
     } catch (err) {
